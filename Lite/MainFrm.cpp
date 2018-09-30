@@ -205,7 +205,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_MESSAGE(WM_NOTIFYICON, OnNotifyIcon)
 	ON_MESSAGE(WM_QUERY_APPCONFIG, OnQueryAppConfig)
 	ON_MESSAGE(WM_DOWNLOAD_PAGE, OnDownloadPage)
-	ON_COMMAND_RANGE(ID_FIRST_HOTSTR, ID_LAST_HOTSTR, OnFrequentlyUsedStr)	//¼öÁä°e¥X¦r¦ê
+	ON_COMMAND_RANGE(ID_FIRST_HOTSTR, ID_LAST_HOTSTR, OnFrequentlyUsedStr)	//¼öÁä°e¥X¦r?E
 	ON_COMMAND_RANGE(ID_FIRST_BBS_FAVORITE, ID_LAST_WEB_FAVORITE, OnFavorite)	//§Úªº³Ì·R
 	ON_COMMAND_RANGE(ID_SWITCHCON1, ID_SWITCHCON10, OnHotkeySwitch)	//µøµ¡¤Á´«
 
@@ -368,7 +368,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	toolbar_bkgnd.GetBitmap(&bmp);
 
 	//img_toolbar.Create(bmp.bmHeight, bmp.bmHeight, ILC_COLOR32|ILC_MASK, 9,0);
-	//¨Ï¥Î bmBitsPixel ¨Ó·í§@ ILC_COLOR* ªº flags ­È
+	//¨Ï¥Î bmBitsPixel ¨Ó·úÃ@ ILC_COLOR* ªº flags ­È
 #ifdef _COMBO_
 	img_toolbar.Create(bmp.bmHeight, bmp.bmHeight, bmp.bmBitsPixel | ILC_MASK, 19, 0);
 #else
@@ -402,7 +402,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		| WS_VISIBLE | TCS_HOTTRACK | TCS_FOCUSNEVER | TCS_TOOLTIPS,
 		tmprc, this, IDC_MAINTAB);
 //	«D±`¸Þ²§¡A·N¥~µo²{¡A¦pªG¤@¶}©l«Ø¥ßOwnerDraw¡AWin XP¤UHotTrack´N·|¥¢®Ä
-//	¦ý¬O¦pªG¥ý«Ø¥ß¤@¯ëªºHotTrack Tab¡A¦A§ï¦¨OwnerDraw¡A´N¥i¥H«O¯dHotTrack :)
+//	¦ý¬O¦pªG¥ý«Ø¥ß¤@?EºHotTrack Tab¡A¦A?E¨OwnerDraw¡A´N¥i¥H«O¯dHotTrack :)
 #if defined(_COMBO_)
 	tab.ModifyStyle(0, TCS_FIXEDWIDTH | TCS_OWNERDRAWFIXED);
 #else
@@ -420,7 +420,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 #endif
 
 //	Create Address Bar
-//----------¦ì§}¦C-------------
+//----------?E}¦C-------------
 	address_bar.Create(CBS_AUTOHSCROLL | CBS_DROPDOWN, scaler.Calc(CRect(0, 0, 0, 320)), this, IDC_ADS_COMBO);
 	address_bar.MoveWindow(scaler.Calc(CRect(0, 0, 200, 24)));
 	address_bar.SetFont(&bar_font);
@@ -455,7 +455,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//web_bar.SetBitmap((HBITMAP)web_bar_bkgnd.m_hObject);
 	web_bar.LoadToolBar(&AppConfig.webbar_inf);
 	web_bar.GetToolBarCtrl().SetImageList(&img_webbar);
-//¦ì§}¦Cªº combobox ¸ê®Æ¦b LoadHistory¸Ì­±¸ü¤J
+//?E}¦Cªº combobox ?EÆ¦b LoadHistory¸Ì­±?EJ
 #endif
 
 //-----------------------------
@@ -496,7 +496,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	rebar.AddBar(&close_btn);	rbi.wID = 3;	rbc.SetBandInfo(2, &rbi);
 
 #ifdef	_COMBO_
-	//¥[¤J¦ì§}¦C	id=4
+	//¥[¤J?E}¦C	id=4
 	rebar.AddBar(&address_bar);
 #else
 	rebar.AddBar(&address_bar, LoadString(IDS_ADS_BAR_TITLE));
@@ -624,7 +624,7 @@ LRESULT CMainFrame::OnCommitUpdate(WPARAM wparam, LPARAM lparam)
 
 	auto_complete.DetachEdit();
 
-	//µøµ¡¤j¤p¦ì¸m
+	//µøµ¡¤j¤p?Em
 	AppConfig.mainwnd_state.Save(m_hWnd);
 
 	//ReBar Position
@@ -636,7 +636,7 @@ LRESULT CMainFrame::OnCommitUpdate(WPARAM wparam, LPARAM lparam)
 	AppConfig.Save(ConfigPath + CONFIG_FILENAME);
 	ShowWindow(SW_HIDE);
 
-//	²M°£©Ò¦³ new ¥X¨Óªº¤À­¶ª«¥ó
+//	²M°£©Ò¦³ new ¥X¨Óªº¤À­¶ª«?E
 	int c = tab.GetItemCount();
 	if (AppConfig.save_session)
 	{
@@ -702,7 +702,7 @@ void CMainFrame::UpdateStatus()
 			int min = (telnet->time - sec) / 60;
 			int hr = telnet->time / 3600;
 			min = min % 60;
-//			text.Format("\t³s½u®É¶¡¡G%d ¤p®É %d ¤À %d ¬í\t\t¦ì§}¡G%s",hr,min,sec,(LPCTSTR)telnet->address);
+//			text.Format("\t³s½u®É¶¡¡G%d ¤p®É %d ¤À %d ¬úxt\t?E}¡G%s",hr,min,sec,(LPCTSTR)telnet->address);
 			text.Format(con_status, hr, min, sec, (LPCTSTR)telnet->address.URL());
 
 			if (telnet->IsSecureConn())
@@ -1089,7 +1089,7 @@ char* UIAddMenu(char* buf, HMENU menu)
 	//	*buf=TYPE;
 	buf++;
 	WORD count = *(WORD*)buf;	//¨ú±osub item count
-	buf += 6 + *(WORD*)(buf + 4);	//¨ì²Ä¤@­Ósub item
+	buf += 6 + *(WORD*)(buf + 4);	//?EÄ¤@­Ósub item
 
 	while (count)
 	{
@@ -1106,19 +1106,19 @@ char* UIAddMenu(char* buf, HMENU menu)
 			len = *(WORD*)(buf + 5);
 			if (*buf & CT_HAS_SUB)
 			{
-				if (*buf & CT_MENU)	//¦pªG¬O¤@¯ë¿ï³æ¶µ¥Ø¤~¥[¤J¿ï³æ
+				if (*buf & CT_MENU)	//¦pªG¬O¤@?EEæ¶µ¥Ø¤~¥[¤J?EE
 				{
 					HMENU sub = CreatePopupMenu();
 					AppendMenu(menu, MF_STRING | MF_POPUP | LOBYTE(*(WORD*)(buf + 3)), (UINT)sub, text);
 					buf = UIAddMenu(buf, sub);
 				}
-				else	//¤£¬O¤@¯ë¿ï³æ¶µ¥Ø
+				else	//¤£¬O¤@?EEæ¶µ¥?
 					buf = UIAddMenu(buf, NULL);
 			}
 			else
 			{
 				//buf=ID
-				if (*buf & CT_MENU)	//¦pªG¬O¤@¯ë¿ï³æ¶µ¥Ø¤~¥[¤J¿ï³æ,¤£¬O¿ï³æ¡A´Nª½±µ²¤¹L
+				if (*buf & CT_MENU)	//¦pªG¬O¤@?EEæ¶µ¥Ø¤~¥[¤J?EE¤£¬O?Eæ¡A´Nª½±µ²¤¹L
 					AppendMenu(menu, MF_STRING | *(WORD*)(buf + 3), *(WORD*)(buf + 1), text);
 				buf += 7 + len;	//Next item
 			}
@@ -2055,7 +2055,7 @@ void CMainFrame::OnToolLock()
 	::SetMenu(m_hWnd, main_menu);
 	AppConfig.lock_pcman = false;
 
-	// °Ñ¦Ò Delphi VCL¡Aµo²{¤è«KÁÙ­ìµøµ¡ªº©Ç©Û
+	// °Ñ¦Ò Delphi VCL¡Aµo²{¤è«KÁÙ?Eøµ¡ªº©Ç©?
 	DefWindowProc(WM_SYSCOMMAND, SC_RESTORE, 0);
 }
 
@@ -2579,9 +2579,9 @@ BOOL CMainFrame::LoadUI()
 	ui->Read(accels, count*sizeof(ACCEL));	//´«ºâ¦¨byte
 
 	m_hAccelTable = CreateAcceleratorTable(accels, count);
-//°ÝÃD¥X¦b³o¸Ì,¶Ç¤JCreateAcceleratorTableªºÀ³¸Ó¬OACCELªº¼Æ¶q,¦Ó¤£¬O¤j¤p(¦ì¤¸²Õ¼Æ)!!!!!!
+//°ÝÃD¥X¦b³o¸Ì,¶Ç¤JCreateAcceleratorTableªºÀ³¸Ó¬OACCELªº¼Æ¶q,¦Ó¤£¬O¤j¤p(?E¸²Õ¼?!!!!!!
 
-//		Accelerator«Ø¥ßµ²§ô,¶}©lÅª¨ú UI
+//		Accelerator«Ø¥ßµ²?E¶}©lÅª?EUI
 
 	l -= count + 2;	//³Ñ¾lUIªø«×
 	char* ui_buf = new char[l+32];
@@ -2589,7 +2589,7 @@ BOOL CMainFrame::LoadUI()
 
 	UIAddMenu(ui_buf, main_menu);
 	delete []ui_buf;
-//		¿ï³æ«Ø¥ßµ²§ô
+//		?Eæ«Ø¥ßµ²§E
 
 	::SetMenu(m_hWnd, main_menu);
 
@@ -2664,7 +2664,7 @@ void CMainFrame::OnShowFrequentlyUsedStr()
 
 void CMainFrame::LoadFrequentlyUsedStr()
 {
-	//Åª¨ú¼öÁä¦r¦ê
+	//Åª¨ú¼öÁä¦r?E
 	if (hhotstr_acc)
 	{
 		::DestroyAcceleratorTable(hhotstr_acc);
@@ -2691,7 +2691,7 @@ void CMainFrame::LoadFrequentlyUsedStr()
 				inf = 0;
 				f.Read4(&inf);
 				tmp = LoadString(f);
-				if (LOWORD(inf))	//¦³¼öÁä
+				if (LOWORD(inf))	//¦³¼ö?E
 				{
 					hotstr.Add(tmp);
 					hotstr_inf.Add(BYTE(inf >> 24));
@@ -2770,11 +2770,11 @@ void CMainFrame::AddToHistoryMenu(CString str)
 			break;
 	}
 
-	if (i < c)	//¦pªG¦³§ä¨ì¤@¼Ëªº¡A¿ï³æ¤£§ïÅÜ¡A¥u²¾°Ê¤º³¡¶¶§Ç
+	if (i < c)	//¦pªG¦³§ä?E@¼Ëªº¡A?Eæ¤£§EÜ¡A¥u²¾°Ê¤º³¡¶¶§Ç
 		AppConfig.favorites.history.RemoveAt(i);
-	else	//¦pªG·s¼W¿ï³æ¶µ¥Ø
+	else	//¦pªG·s¼W?Eæ¶µ¥?
 	{
-		//­««Ø¿ï³æ
+		//­««Ø?EE
 		for (i = 0;i < AppConfig.favorites.history.GetSize(); i++)
 		{
 			UINT id = ID_FIRST_HISTORY + i + 1;
@@ -3016,7 +3016,7 @@ void CMainFrame::OnFavorite(UINT id)
 
 void CMainFrame::OnViewFullscr()
 {
-	if (AppConfig.is_full_scr)	//¦pªG¤w¸g¬O¥þ¿Ã¹õ
+	if (AppConfig.is_full_scr)	//¦pªG¤w¸g¬O¥þ¿Ã?E
 	{
 		ModifyStyle(WS_POPUP, WS_OVERLAPPEDWINDOW);
 		ShowWindow(SW_HIDE);
@@ -3026,7 +3026,7 @@ void CMainFrame::OnViewFullscr()
 		ShowWindow(SW_HIDE);
 		ShowWindow(showcmd);
 	}
-	else	//¦pªG¤£¬O¥þ¿Ã¹õ
+	else	//¦pªG¤£¬O¥þ¿Ã?E
 	{
 		WINDOWPLACEMENT wpm;
 		GetWindowPlacement(&wpm);
@@ -3053,8 +3053,6 @@ void CMainFrame::OnToolSymbols()
 }
 
 
-extern int _afxComCtlVersion;
-DWORD AFXAPI _AfxGetComCtlVersion();
 
 void CMainFrame::OnViewConfig()
 {
@@ -3113,20 +3111,13 @@ void CMainFrame::OnViewConfig()
 
 	if (AppConfig.tab_button != tab_button)
 	{
-		if (_afxComCtlVersion >= MAKELONG(0, 6))	//Win XP IE 6.0
+		if (AppConfig.tab_button)
 		{
-			MessageBox(LoadString(IDS_TAB_STYLE_ERR_MSG), LoadString(IDS_ATTENTION), MB_OK | MB_ICONINFORMATION);
+			tab.ModifyStyle(TCS_BOTTOM, (TCS_FLATBUTTONS | TCS_BUTTONS | TCS_HOTTRACK));
+			tab.ModifyStyleEx(0, TCS_EX_FLATSEPARATORS);
 		}
 		else
-		{
-			if (AppConfig.tab_button)
-			{
-				tab.ModifyStyle(TCS_BOTTOM, (TCS_FLATBUTTONS | TCS_BUTTONS | TCS_HOTTRACK));
-				tab.ModifyStyleEx(0, TCS_EX_FLATSEPARATORS);
-			}
-			else
-				tab.ModifyStyle(TCS_FLATBUTTONS | TCS_BUTTONS, AppConfig.kktab ? TCS_BOTTOM : 0);
-		}
+			tab.ModifyStyle(TCS_FLATBUTTONS | TCS_BUTTONS, AppConfig.kktab ? TCS_BOTTOM : 0);
 	}
 
 	while (AppConfig.max_history < AppConfig.history.GetCount())
@@ -3147,8 +3138,8 @@ void CMainFrame::OnViewConfig()
 
 void CMainFrame::LoadHistoryMenu()
 {
-	history_menu = CreatePopupMenu();	int i;
-	for (i = 0;i < AppConfig.favorites.history.GetSize();i++)
+	history_menu = CreatePopupMenu();
+	for (int i = 0;i < AppConfig.favorites.history.GetSize();i++)
 		AppendMenu(history_menu, MF_OWNERDRAW,
 				   ID_FIRST_HISTORY + i, LPCTSTR(ID_FIRST_HISTORY + i));
 
@@ -3307,12 +3298,12 @@ void CMainFrame::SwitchToConn(int index)
 	int lines_per_page = 0;
 
 #if defined _COMBO_/////////////////////////
-	if (view.telnet)	//¦pªG­ì¥»¬OBBS¡A°O¿ý­ì¥»ªº¦æ¦C¼Æ
+	if (view.telnet)	//¦pªG?E»¬OBBS¡A°O¿ý?E»ªº¦æ¦C¼Æ
 	{
 		cols_per_page = view.telnet->site_settings.cols_per_page;
 		lines_per_page = view.telnet->site_settings.lines_per_page;
 	}
-	else	//¦pªG­ì¥»¬Oºô­¶¡A©Î¬O®Ú¥»¨Sµe­±
+	else	//¦pªG?E»¬Oºô­¶¡A©Î¬O®Ú¥»¨Sµe­±
 	{
 		if (view.con)
 		{
@@ -3602,7 +3593,7 @@ void CMainFrame::OnPasteTinyUrl()
 {
 	CString url = TINY_URL;
 	CString text;
-	if (!CClipboard::GetText(text)) //²Ä¤@¦¸±q°Å¶KÃ¯¨ú¦r¦ê (ansi¦r¦ê)
+	if (!CClipboard::GetText(text)) //²Ä¤@¦¸±q°Å¶KÃ¯¨ú¦r?E(ansi¦r?E
 		return;
 	url += text;
 
@@ -3663,12 +3654,12 @@ void CMainFrame::OnPaste()
 		return;
 
 	//°»´ú¬O§_¥]§t¦â±m½X
-	//¦pªG¦³¦â±m½X¡A§ï¦¨±m¦â¶K¤W
+	//¦pªG¦³¦â±m½X¡A?E¨±m¦â¶K¤W
 	if (IsContainAnsiCode(text))
 		view.SendAnsiString(text);
 	else	//§_«h¥¿±`¶K¤W¯Â¤å¦r
 	{
-		//¨Ã¥B¦pªG¤£¥]§t¦â±m½X¡A¦A­«·s±q°Å¶KÃ¯¨ú¤@¦¸¦r¦ê (§ï¨úUnicode¦r¦ê)
+		//¨Ã¥B¦pªG¤£¥]§t¦â±m½X¡A¦A­«·s±q°Å¶KÃ¯¨ú¤@¦¸¦r?E(?EúUnicode¦r?E
 
 		wchar_t* pwstr = NULL;
 		if (CClipboard::GetTextW(&pwstr))
@@ -3693,8 +3684,8 @@ void CMainFrame::OnPaste()
 				delete [] pstr;
 			if (pwstr)
 				delete [] pwstr;
-			//¦Ò¼{¨ì server ºÝ¹ê»Ú±µ¦¬¸ê®Æªº³t«×¤£§Ö¡A
-			//©Ò¥H³oÃä¸Õ¹Ï©¿²¤±¼±q°Å¶KÃ¯¨ú¨â¦¸¸ê®Æªº¶}¾P·l¥¢
+			//¦Ò¼{?Eserver ºÝ?EÚ±µ¦¬¸EÆªº³t«×¤£§Ö¡A
+			//©Ò¥H³oÃä¸Õ¹Ï©¿²¤±¼±q°Å¶KÃ¯¨ú¨â¦¸?EÆªº¶}¾P·l¥¢
 		}
 		view.telnet->SendString(text);
 	}
@@ -3987,7 +3978,7 @@ void CMainFrame::OnBBSFont()
 		int lines_per_page = telnet ? telnet->site_settings.lines_per_page : AppConfig.site_settings.lines_per_page;
 		CRect rc;
 		view.GetClientRect(&rc);
-		if (AppConfig.auto_font)	//¦pªG¨Ï¥Î°ÊºA¦rÅé½Õ¾ã
+		if (AppConfig.auto_font)	//¦pªG¨Ï¥Î°ÊºA¦rÅé½Õ?E
 		{
 			view.AdjustFont(rc.right, rc.bottom);
 		}
