@@ -207,7 +207,8 @@ LPSTR CTermView::ctviewcls = "BBS_View";
 BOOL CTermView::PreCreateWindow(CREATESTRUCT& cs)
 {
 	cs.style |= WS_VSCROLL;
-	cs.dwExStyle |= WS_EX_CLIENTEDGE;
+	// remove white edge in window mode #1TI-1j7y (PCman)
+	//cs.dwExStyle |= WS_EX_CLIENTEDGE;
 	RegWndClass(ctviewcls, AfxGetAfxWndProc(), NULL, NULL, AfxGetApp()->LoadStandardCursor(IDC_ARROW), CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS);
 	cs.lpszClass = ctviewcls;
 	return TRUE;
