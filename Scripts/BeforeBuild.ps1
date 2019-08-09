@@ -13,6 +13,11 @@ Copy-Item 'OpenSourceLicenses.txt' 'Combo\Release\PCMan Combo\'
 Copy-Item 'OpenSourceLicenses.txt' 'Lite\Debug\PCMan\'
 Copy-Item 'OpenSourceLicenses.txt' 'Lite\Release\PCMan\'
 
+Copy-Item 'C:\tools\vcpkg\installed\x86-windows\bin\zlib1.dll' 'Combo\Debug\PCMan Combo\'
+Copy-Item 'C:\tools\vcpkg\installed\x86-windows\bin\zlib1.dll' 'Combo\Release\PCMan Combo\'
+Copy-Item 'C:\tools\vcpkg\installed\x86-windows\bin\zlib1.dll' 'Lite\Debug\PCMan\'
+Copy-Item 'C:\tools\vcpkg\installed\x86-windows\bin\zlib1.dll' 'Lite\Release\PCMan\'
+
 md Release
 & .\Version_PreBuildEvent_Combo.bat
 & .\Version_PreBuildEvent_Lite.bat
