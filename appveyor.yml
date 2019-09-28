@@ -13,6 +13,7 @@ install:
 - git pull
 - .\bootstrap-vcpkg.bat
 - vcpkg remove --outdated --recurse
+- copy /y "%APPVEYOR_BUILD_FOLDER%\hack\portfile.cmake" C:\Tools\vcpkg\ports\libwebsockets\portfile.cmake
 - vcpkg install libwebsockets
 - cd "%APPVEYOR_BUILD_FOLDER%"
 - ps: .\Scripts\BeforeBuild.ps1
@@ -23,6 +24,7 @@ build_script:
 after_build:
 - ps: .\Scripts\DownloadNonFree.ps1
 - ps: .\Scripts\AfterBuild.ps1
+- set release=%APPVEYOR_REPO_COMMIT:~0,7%
 
 artifacts:
 - path: Lite\Release\PCMan.zip
@@ -35,5 +37,9 @@ cache:
 
 deploy:
   provider: GitHub
+  tag: git
+  release: $(release)
   auth_token: $(github_auth_token)
-  draft: true
+  force_update: true
+  on:
+    branch: master
