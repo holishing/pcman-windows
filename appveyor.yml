@@ -12,6 +12,7 @@ install:
 - cd "C:\Tools\vcpkg"
 - git pull
 - .\bootstrap-vcpkg.bat
+- vcpkg integrate install
 - vcpkg remove --outdated --recurse
 - copy /y "%APPVEYOR_BUILD_FOLDER%\hack\portfile.cmake" C:\Tools\vcpkg\ports\libwebsockets\portfile.cmake
 - vcpkg install libwebsockets
