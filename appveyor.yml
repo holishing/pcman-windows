@@ -34,7 +34,7 @@ artifacts:
 - path: Release\PCManCB.exe
 
 cache:
-- c:\tools\vcpkg\installed\
+- c:\tools\vcpkg\installed\ -> appveyor.yml
 
 deploy:
   provider: GitHub
