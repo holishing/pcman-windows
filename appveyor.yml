@@ -10,7 +10,7 @@ install:
 - .\bootstrap-vcpkg.bat
 - cd "%APPVEYOR_BUILD_FOLDER%"
 - vcpkg remove --outdated --recurse
-- vcpkg install cpprestsdk
+- vcpkg install cpprestsdk boost libwebsockets
 
 - ps: .\Scripts\BeforeBuild.ps1
 clone_folder: C:\projects\pcman-windows
